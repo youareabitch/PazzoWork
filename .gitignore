@@ -50,3 +50,13 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+/PazzoApi/.vs
+/PazzoApi/packages
+/PazzoApi/PazzoApi/obj
+/PazzoApi/PazzoApi.DB/bin
+/PazzoApi/PazzoApi.DB/obj
+/PazzoApi/PazzoApi.Service/bin
+/PazzoApi/PazzoApi.Service/obj
+/PazzoApi/PazzoApo.Model/bin
+/PazzoApi/PazzoApo.Model/obj
+/PazzoApi/PazzoApi/bin
