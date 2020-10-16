@@ -14,17 +14,23 @@
       <b-table class="mt-2" striped hover :items="datas" :fields="cols">
         <template v-slot:cell(ProductName)="data">
           <!-- `data.value` is the value after formatted by the Formatter -->
-          <a href="#" @click.prevent="edit(data.item.ProductID)">{{ data.value }}</a>
+          <a href="#" @click.prevent="edit(data.item.ProductID)">{{
+            data.value
+          }}</a>
         </template>
       </b-table>
     </div>
-    <ProductsForm v-if="pageState === 'form'" :id="editId" />
+    <ProductsForm
+      v-if="pageState === 'form'"
+      :id="editId"
+      @back="backToIndex"
+    />
   </div>
 </template>
 
 <script>
-import axios from "axios";
 import ProductsForm from "@/components/ProductsForm.vue";
+import { getProductsAll } from "../apis/products";
 
 export default {
   name: "Products",
@@ -48,7 +54,7 @@ export default {
     };
   },
   mounted() {
-    axios.get("http://localhost:14884/api/Products/GetAll").then((x) => {
+    getProductsAll().then((x) => {
       this.datas = x.data;
     });
   },
@@ -60,6 +66,15 @@ export default {
     edit(id) {
       this.editId = id;
       this.pageState = "form";
+    },
+    backToIndex(isReload = false) {
+      if (isReload) {
+        getProductsAll().then((x) => {
+          this.datas = x.data;
+          console.log("reloaded");
+        });
+      }
+      this.pageState = "index";
     },
   },
 };
