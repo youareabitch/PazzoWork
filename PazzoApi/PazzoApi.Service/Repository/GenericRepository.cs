@@ -141,7 +141,7 @@ namespace PazzoApi.Service.Repository
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <exception cref="System.NotImplementedException"></exception>
-        public async void Delete(TEntity instance)
+        public async Task<bool> Delete(TEntity instance)
         {
             if (instance == null)
             {
@@ -151,6 +151,7 @@ namespace PazzoApi.Service.Repository
             {
                 this._context.Entry(instance).State = EntityState.Deleted;
                 await this.SaveChanges();
+                return true;
             }
         }
 

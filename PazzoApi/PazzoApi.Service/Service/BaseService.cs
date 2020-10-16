@@ -37,11 +37,11 @@ namespace PazzoApi.Service.Service
             return result;
         }
 
-        public virtual bool Delete(int id)
+        public virtual async Task<bool> DeleteAsync(int id)
         {
             bool result = false;
             var entity = _repository.GetById(id);
-            _repository.Delete(entity);
+            await _repository.Delete(entity);
             _repository.UnitOfWork.SaveChange();
             result = true;
             return result;

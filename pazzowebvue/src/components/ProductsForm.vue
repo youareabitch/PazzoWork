@@ -118,7 +118,6 @@
         </b-form-checkbox>
       </b-form-group>
     </b-form>
-    <button class="btn btn-primary" @click.prevent="test()">test</button>
   </div>
 </template>
 
@@ -183,9 +182,6 @@ export default {
             alert(x);
           });
       }
-    },
-    test() {
-      console.log(JSON.parse(JSON.stringify(this.formData)));
     },
     getObject(obj) {
       return JSON.parse(JSON.stringify(obj));

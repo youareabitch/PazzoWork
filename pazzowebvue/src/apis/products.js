@@ -11,3 +11,5 @@ export const getProductById = data => request.get('/GetById', data);
 export const addProduct = data => request.post('/Add', data);
 
 export const editProduct = data => request.put('/Edit', data);
+
+export const deleteProduct = data => request.delete('/Delete', data);

@@ -40,7 +40,7 @@
 
 <script>
 import ProductsForm from "@/components/ProductsForm.vue";
-import { getProductsAll } from "../apis/products";
+import { getProductsAll, deleteProduct } from "../apis/products";
 
 export default {
   name: "Products",
@@ -65,11 +65,14 @@ export default {
     };
   },
   mounted() {
-    getProductsAll().then((x) => {
-      this.datas = x.data;
-    });
+    this.loadData();
   },
   methods: {
+    loadData() {
+      getProductsAll().then((x) => {
+        this.datas = x.data;
+      });
+    },
     add() {
       this.editId = 0;
       this.pageState = "form";
@@ -80,15 +83,22 @@ export default {
     },
     backToIndex(isReload = false) {
       if (isReload) {
-        getProductsAll().then((x) => {
-          this.datas = x.data;
-          console.log("reloaded");
-        });
+        this.loadData();
       }
       this.pageState = "index";
     },
-    deleteData(id) {
-      alert(id);
+    deleteData(delId) {
+      deleteProduct({ params: { id: delId } })
+        .then((x) => {
+          if (x.data) {
+            alert("刪除成功");
+            this.loadData();
+          } else alert(x.statusText);
+        })
+        .catch((x) => {
+          console.log(x);
+          alert(x);
+        });
     },
   },
 };

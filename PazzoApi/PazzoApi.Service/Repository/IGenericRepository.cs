@@ -21,7 +21,7 @@ namespace PazzoApi.Service.Repository
         /// <param name="entities">The instance.</param>
         Task<bool> AddRange(IList<TEntity> entities);
 
-        void Delete(TEntity instance);
+        Task<bool> Delete(TEntity instance);
 
         /// <summary>
         /// 多筆刪除

@@ -70,5 +70,16 @@ namespace PazzoApi.Controllers
 
             return await _productsService.Edit(editModel);
         }
+
+        /// <summary>
+        /// 刪除資料
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        public async Task<bool> Delete(int id)
+        {
+            return await _productsService.DeleteAsync(id);
+        }
     }
 }
