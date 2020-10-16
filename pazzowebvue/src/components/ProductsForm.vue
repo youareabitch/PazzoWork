@@ -118,11 +118,13 @@
         </b-form-checkbox>
       </b-form-group>
     </b-form>
+    <button class="btn btn-primary" @click.prevent="test()">test</button>
   </div>
 </template>
 
 <script>
 import { getProductById, addProduct, editProduct } from "../apis/products";
+// import axios from 'axios';
 
 export default {
   name: "ProductsForm",
@@ -160,7 +162,7 @@ export default {
     },
     save() {
       if (!this.id) {
-        addProduct({ params: { bm: this.formData } })
+        addProduct(this.getObject(this.formData))
           .then((x) => {
             if (x.data) this.back(true);
             else alert(x.statusText);
@@ -170,7 +172,8 @@ export default {
             alert(x);
           });
       } else {
-        editProduct({ params: { bm: this.formData } })
+        console.log(this.getObject(this.formData));
+        editProduct(this.getObject(this.formData))
           .then((x) => {
             if (x.data) this.back(true);
             else alert(x.statusText);
@@ -180,6 +183,12 @@ export default {
             alert(x);
           });
       }
+    },
+    test() {
+      console.log(JSON.parse(JSON.stringify(this.formData)));
+    },
+    getObject(obj) {
+      return JSON.parse(JSON.stringify(obj));
     },
   },
 };

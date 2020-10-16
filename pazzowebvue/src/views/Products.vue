@@ -18,6 +18,16 @@
             data.value
           }}</a>
         </template>
+
+        <template v-slot:cell(command)="data">
+          <button
+            class="btn btn-danger"
+            type="button"
+            @click.prevent="deleteData(data.item.ProductID)"
+          >
+            刪除
+          </button>
+        </template>
       </b-table>
     </div>
     <ProductsForm
@@ -48,6 +58,7 @@ export default {
         "UnitsInStock",
         "UnitsOnOrder",
         "Discontinued",
+        "command",
       ],
       pageState: "index",
       editId: 0,
@@ -75,6 +86,9 @@ export default {
         });
       }
       this.pageState = "index";
+    },
+    deleteData(id) {
+      alert(id);
     },
   },
 };
